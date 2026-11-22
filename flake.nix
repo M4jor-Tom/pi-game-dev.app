@@ -1,5 +1,5 @@
 {
-  description = "pi coding agent, pre-loaded with the pi-power-dev profile";
+  description = "pi coding agent, pre-loaded with the pi-game-dev profile";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -16,7 +16,11 @@
       eachSystem = f: lib.foldl' lib.recursiveUpdate { } (map f (import systems));
 
       overlay = final: prev: {
-        pi-power-dev = final.callPackage ./package.nix { };
+        pi-game-dev = final.callPackage ./package.nix {
+          profileName = "pi-game-dev";
+          configRepo = "https://github.com/M4jor-Tom/pi-game-dev.git";
+          dirEnvVar = "PI_GAME_DEV_DIR";
+        };
       };
     in
     eachSystem
@@ -29,20 +33,20 @@
       in
       {
         packages.${system} = {
-          default = pkgs.pi-power-dev;
-          pi-power-dev = pkgs.pi-power-dev;
+          default = pkgs.pi-game-dev;
+          pi-game-dev = pkgs.pi-game-dev;
         };
 
         apps.${system} = {
           default = {
             type = "app";
-            program = "${pkgs.pi-power-dev}/bin/pi-power-dev";
-            meta.description = "pi coding agent running the pi-power-dev profile";
+            program = "${pkgs.pi-game-dev}/bin/pi-game-dev";
+            meta.description = "pi coding agent running the pi-game-dev profile";
           };
-          pi-power-dev = {
+          pi-game-dev = {
             type = "app";
-            program = "${pkgs.pi-power-dev}/bin/pi-power-dev";
-            meta.description = "pi coding agent running the pi-power-dev profile";
+            program = "${pkgs.pi-game-dev}/bin/pi-game-dev";
+            meta.description = "pi coding agent running the pi-game-dev profile";
           };
         };
 

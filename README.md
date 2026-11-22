@@ -1,23 +1,24 @@
-# pi-power-dev.app
+# pi-game-dev.app
 
 Runs the [pi](https://pi.dev) coding agent against the
-[`pi-power-dev`](https://github.com/M4jor-Tom/pi-power-dev) profile, and
+[`pi-game-dev`](https://github.com/M4jor-Tom/pi-game-dev) profile — the shared
+base plus ontology-first game development — and
 supplies every CLI that profile's skills shell out to.
 
 ```bash
-nix run github:M4jor-Tom/pi-power-dev.app
+nix run github:M4jor-Tom/pi-game-dev.app
 ```
 
-On first run it clones the profile to `~/.pi-power-dev`. On later runs it
+On first run it clones the profile to `~/.pi-game-dev`. On later runs it
 fast-forwards that clone, but only when the tree is clean — local edits are
 never clobbered — and only when `origin` still points at this profile's own
-repo, so pointing `PI_POWER_DEV_DIR` at a fork or an unrelated checkout gets
-no pulls. Override the location with `PI_POWER_DEV_DIR`.
+repo, so pointing `PI_GAME_DEV_DIR` at a fork or an unrelated checkout gets
+no pulls. Override the location with `PI_GAME_DEV_DIR`.
 
 This app is a convenience, not a requirement. The profile works on its own:
 
 ```bash
-PI_CODING_AGENT_DIR=~/.pi-power-dev pi
+PI_CODING_AGENT_DIR=~/.pi-game-dev pi
 ```
 
 ## What it ships
