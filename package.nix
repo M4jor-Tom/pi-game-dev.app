@@ -1,4 +1,5 @@
 { lib
+, stdenv
 , writeShellApplication
 , pi-coding-agent
 , git
@@ -18,6 +19,7 @@
 , pandoc
 , poppler-utils
 , yt-dlp
+, wl-clipboard
   # Which profile this wrapper runs. Task 10 reuses this file with the
   # pi-game-dev values.
 , profileName ? "pi-power-dev"
@@ -47,7 +49,7 @@ writeShellApplication {
     pandoc
     poppler-utils
     yt-dlp
-  ];
+  ] ++ lib.optionals stdenv.hostPlatform.isLinux [ wl-clipboard ];
 
   # The config repo is a git working tree, never a store symlink: pi merges
   # its own fields back into settings.json under a lock, so that file has to
